@@ -9,48 +9,48 @@ struct ListNode
 };
 
 //插入一个新节点到链表中(放在链表头部)
-void CreateList(ListNode*& head, int data)
-{
-	//创建新节点
-	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
-	p->value = data;
-	p->next = NULL;
+//void CreateList(ListNode*& head, int data)
+//{
+//	//创建新节点
+//	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+//	p->value = data;
+//	p->next = NULL;
+//
+//	if (head == NULL)
+//	{
+//		head = p;
+//		return;
+//	}
+//	p->next = head;
+//	head = p;
+//}
 
-	if (head == NULL)
-	{
-		head = p;
-		return;
-	}
-	p->next = head;
-	head = p;
-}
-
-void  printList(ListNode* head)
-{
-	ListNode* p = head;
-	while (p != NULL)
-	{
-		cout << p->value << " ";
-		p = p->next;
-	}
-	cout << endl;
-}
+//void  printList(ListNode* head)
+//{
+//	ListNode* p = head;
+//	while (p != NULL)
+//	{
+//		cout << p->value << " ";
+//		p = p->next;
+//	}
+//	cout << endl;
+//}
 
 
 //递归方式：实现单链表反转
-ListNode* ReverseList(ListNode* head)
-{
-	//递归终止条件：找到链表最后一个结点
-	if (head == NULL || head->next == NULL)
-		return head;
-	else
-	{
-		ListNode* newhead = ReverseList(head->next);//先反转后面的链表，从最后面的两个结点开始反转，依次向前
-		head->next->next = head;//将后一个链表结点指向前一个结点
-		head->next = NULL;//将原链表中前一个结点指向后一个结点的指向关系断开
-		return newhead;
-	}
-}
+//ListNode* ReverseList(ListNode* head)
+//{
+//	//递归终止条件：找到链表最后一个结点
+//	if (head == NULL || head->next == NULL)
+//		return head;
+//	else
+//	{
+//		ListNode* newhead = ReverseList(head->next);//先反转后面的链表，从最后面的两个结点开始反转，依次向前
+//		head->next->next = head;//将后一个链表结点指向前一个结点
+//		head->next = NULL;//将原链表中前一个结点指向后一个结点的指向关系断开
+//		return newhead;
+//	}
+//}
 
 //非递归方式：实现单链表反转
 ListNode* reverseList2(ListNode* head) {
@@ -71,6 +71,44 @@ ListNode* reverseList2(ListNode* head) {
 	return prev;
 }
 
+void CreateList(ListNode*& head, int data) {
+	ListNode* p = (ListNode*)malloc(sizeof(ListNode));
+	p->value = data;
+	p->next = NULL;
+	if (head==NULL)
+	{
+		head = p;
+		return;
+	}
+	p->next = head;
+	head = p;
+}
+
+void  printList(ListNode* head)
+{
+	ListNode* p = head;
+	while (p != NULL)
+	{
+		cout << p->value << " ";
+		p = p->next;
+	}
+	cout << endl;
+}
+
+ListNode* ReverseList(ListNode* head) {
+	//ListNode* p = head;
+	if (head==NULL||head->next==NULL)
+	{
+		return head;
+	}
+	else
+	{
+		ListNode* newNode = ReverseList(head->next);
+		head->next->next = head;
+		head->next = NULL;
+		return newNode;
+	}
+}
 
 int main()
 {
